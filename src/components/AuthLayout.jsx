@@ -23,6 +23,7 @@ function AuthLayout({ children, title = "LukiPay" }) {
               layout="intrinsic"
               objectFit="cover"
               quality={100}
+              alt="wave"
             />
           </div>
           <div className={style.sectionwrapper}>
@@ -35,6 +36,7 @@ function AuthLayout({ children, title = "LukiPay" }) {
                 layout="responsive"
                 objectFit="scale-down"
                 height={850}
+                alt="wave"
               />
             </div>
             <div className={style.subinfo}>
