@@ -1,0 +1,18 @@
+.footer{
+    color: #fff;
+    padding: 5px 10%;
+    background-color: #6379F4 ;
+    display: flex;
+    justify-content: space-between;
+}
+.footerP{
+    display: flex;
+    gap: 20px;
+}
+
+@media screen and (max-width: 426px) {
+    .footer{
+        flex-direction: column;
+    }
+    
+}

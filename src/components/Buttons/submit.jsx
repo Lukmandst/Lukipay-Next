@@ -1,7 +1,7 @@
 
-function SubmitBtn({value}) {
+function SubmitBtn({value, onClick}) {
   return (
-    <input type="submit" value={value} />
+    <input type="submit" value={value} onClick={onClick} />
   )
 }
 

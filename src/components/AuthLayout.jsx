@@ -12,6 +12,9 @@ function AuthLayout({ children, title = "LukiPay" }) {
       <Head>
         <title>{title}</title>
       </Head>
+      <div className={style.wave2}>
+        <Image src={LoginWave} layout="" objectFit="fill" quality={100} />
+      </div>
       <div className={style.wrapper}>
         <div className={style.section}>
           <div className={style.wave}>
@@ -45,7 +48,12 @@ function AuthLayout({ children, title = "LukiPay" }) {
             </div>
           </div>
         </div>
-        <main className={style.main}>{children}</main>
+        <main className={style.main}>
+          <header className={style.title2}>
+            <Link href={"/"}>LukiPay</Link>
+          </header>
+          {children}
+        </main>
       </div>
     </div>
   );
