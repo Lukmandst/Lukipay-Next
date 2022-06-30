@@ -1,8 +1,8 @@
-@import url('https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@200;300;400;600;700;800;900&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@200;300;400;600;700;800;900&display=swap");
 html,
 body {
   padding: 0;
-  margin: 0;
+  margin: 0 0;
   font-family: Nunito Sans;
 }
 
@@ -11,19 +11,69 @@ a {
   text-decoration: none;
 }
 
-* {
+* ::before,
+*::after {
   box-sizing: border-box;
   margin: 0 0;
 }
-:root{
-  --primary-color: #6379F4;
-  --dark-color: #3A3D42;
+:root {
+  --primary-color: #6379f4;
+  --dark-color: #3a3d42;
   --white-color: #fff;
-  --error-color: #FF5B37;
+  --error-color: #ff5b37;
   --primary-20: rgba(99, 121, 244, 0.2);
-  --success-color: #1EC15F;
-  --input-empty: #B5BDCC;
-  --inactive-color: #DADADA;
-  --button-grey: #EBEEF2;
+  --success-color: #1ec15f;
+  --input-empty: #b5bdcc;
+  --inactive-color: #dadada;
+  --button-grey: #ebeef2;
+}
+button {
+  cursor: pointer;
+}
 
+.input-wrapper {
+  display: flex;
+  position: relative;
+  border-bottom: 1.5px solid rgba(169, 169, 169, 0.6);
+}
+i {
+  position: absolute;
+  top: 1rem;
+}
+
+input[type="email"],
+input[type="password"],
+input[type="text"] {
+  width: 100%;
+  height: 30px;
+  padding: 10px 25px;
+  border: none;
+}
+
+input[type="submit"] {
+  cursor: pointer;
+  color: #fff;
+  width: 100%;
+  height: 45px;
+  background-color: #6379f4;
+  border: none;
+  border-radius: 12px;
+}
+
+input ::placeholder {
+  color: rgba(169, 169, 169, 0.8);
+}
+input:focus,
+textarea:focus,
+select:focus {
+  outline: none;
+  border-bottom: 1.5px solid var(--primary-color);
+}
+
+eye {
+  position: absolute;
+  top: 1.2rem;
+  right: 0;
+  cursor: pointer;
+  user-select: none;
 }

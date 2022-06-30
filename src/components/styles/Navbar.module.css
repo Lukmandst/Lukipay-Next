@@ -1,0 +1,46 @@
+@import url("https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@200;300;400;600;700;800;900&display=swap");
+
+.header {
+  display: flex;
+  background-color: transparent;
+  justify-content: space-between;
+  padding: 0 10%;
+  min-height: 12vh;
+}
+.title {
+  display: flex;
+  color: #6379f4;
+  align-items: center;
+  text-align: center;
+  cursor: pointer;
+}
+.buttonWrapper {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+.loginbutton {
+  font-weight: 700;
+  height: 40px;
+  width: 125px;
+  border-radius: 12px;
+  border: 3px solid #fff;
+  background-color: transparent;
+  color: #fff;
+}
+.signupbutton {
+  font-weight: 700;
+  height: 40px;
+  width: 125px;
+  border: none;
+  border-radius: 12px;
+  background-color: #fff;
+  color: #6379f4;
+}
+
+@media screen and (max-width: 426px) {
+  .header {
+    flex-direction: column;
+    padding-bottom: 20px;
+  }
+}
