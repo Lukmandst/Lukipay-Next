@@ -13,6 +13,8 @@ function Signup() {
   const [lastname, setLast] = useState("");
   const [email, setEmail] = useState("");
   const [pass, setPass] = useState("");
+  const [errorMsg, setErrorMsg] = useState(false);
+  const [successMsg, setSuccesMsg] = useState(false);
   const regisHandler = async () => {
     const body = {
       firstName: firstname,
@@ -20,30 +22,60 @@ function Signup() {
       email: email,
       password: pass,
     };
-    console.log(body);
+    let emailFormat = /^\w+([.-]?\w+)@\w+([.-]?\w+)(.\w{2,3})+$/;
+    let passFormat = /(?=.*[0-9])/;
+    // console.log(body.firstName.length);
     try {
-      const registResult = await axios({
-        method: "POST",
-        url: `${process.env.NEXT_PUBLIC_HOST_API}/auth/register`,
-        data: body,
-      });
-      console.log(registResult);
+      if (
+        body.firstName.length < 1 &&
+        body.lastName.length < 1 &&
+        body.email.length < 1 &&
+        body.password.length < 1
+      ) {
+        setErrorMsg("Data cannot be empty !");
+      } else if (body.firstName.length < 3) {
+        setErrorMsg("Firstname should be 3 characters or more !");
+      } else if (body.lastName.length < 3) {
+        setErrorMsg("Lastname should be 3 characters or more !");
+      } else if (!body.email.match(emailFormat)) {
+        setErrorMsg("Email format should be mail@mail.com !");
+      } else if (body.password.length < 3 || !body.password.match(passFormat)) {
+        setErrorMsg(
+          "Password should be at least 3 characters and includes at least 1 numeric character !"
+        );
+      } else {
+        setErrorMsg(false);
+        const registResult = await axios({
+          method: "POST",
+          url: `${process.env.NEXT_PUBLIC_HOST_API}/auth/register`,
+          data: body,
+        });
+        setSuccesMsg(registResult.data.msg);
+      }
     } catch (error) {
-      console.log(error);
+      {
+        error.response
+          ? setErrorMsg(error.response.data.msg)
+          : setErrorMsg(error.response);
+      }
+      // console.log(error);
     }
   };
 
   return (
     <div>
       <AuthLayout title="SignUp | LukiPay">
-        <header className={style.header}>
-          Start Accessing Banking Needs With All Devices and All Platforms With
-          30.000+ Users
-        </header>
-        <div className={style.info}>
-          Transfering money is eassier than ever, you can access FazzPay
-          wherever you are. Desktop, laptop, mobile phone? we cover all of that
-          for you!
+        <div className="header-wrapper">
+          <header className={style.header}>
+            Start Accessing Banking Needs With All Devices and All Platforms
+            With 30.000+ Users
+          </header>{" "}
+          <br />
+          <div className={style.info}>
+            Transfering money is eassier than ever, you can access FazzPay
+            wherever you are. Desktop, laptop, mobile phone? we cover all of
+            that for you!
+          </div>
         </div>
         <div className={style.formwrapper}>
           <form>
@@ -63,9 +95,16 @@ function Signup() {
               setPass={setPass}
             />
           </form>
-          <SubmitBtn value={"Sign Up"} onClick={regisHandler} />
+          {errorMsg ? (
+            <div className="alert-danger">{errorMsg}</div>
+          ) : successMsg ? (
+            <div className="alert-success">{successMsg}</div>
+          ) : (
+            <></>
+          )}
+          <SubmitBtn value={"Sign Up"} onClick={regisHandler} disabled={!firstname || !lastname || !email || !pass} />
           <p style={{ textAlign: "center" }}>
-            Already have an account? Let's
+            Already have an account? Let`s
             <span style={{ color: "#6379f4" }}>
               <Link href={"/login"}> Login</Link>
             </span>

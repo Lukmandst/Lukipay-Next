@@ -2,6 +2,7 @@ import {
   legacy_createStore as createStore,
   compose,
   applyMiddleware,
+  combineReducers,
 } from "redux";
 import thunk from "redux-thunk";
 import logger from "redux-logger";
@@ -9,14 +10,24 @@ import { persistStore, persistReducer } from "redux-persist";
 import storage from "redux-persist/lib/storage";
 
 import reducers from "./reducers";
+import authReducer from "./reducers/authReducer";
 
-const persistConfig = {
+const rootPersistConfig = {
   key: "root",
   storage,
-  whitelist: ["authReducer", "userReducer"],
+  whitelist: ["authReducer"],
+};
+const authPersistConfig = {
+  key: "authReducer",
+  storage,
+  whitelist: ["token", "pin"],
 };
 
-const persistedReducer = persistReducer(persistConfig, reducers);
+const storeReducer = combineReducers({
+  auth: persistReducer(authPersistConfig, authReducer),
+});
+
+const persistedReducer = persistReducer(rootPersistConfig, storeReducer);
 
 export const store = createStore(
   persistedReducer,

@@ -34,7 +34,7 @@ button {
 .input-wrapper {
   display: flex;
   position: relative;
-  border-bottom: 1.5px solid rgba(169, 169, 169, 0.6);
+  /* border-bottom: 1.5px solid rgba(169, 169, 169, 0.6); */
 }
 i {
   position: absolute;
@@ -49,6 +49,17 @@ input[type="text"] {
   padding: 10px 25px;
   border: none;
   font-size: 20px;
+  border-bottom: 2px solid rgba(169, 169, 169, 0.6);
+}
+input[type="email"]:placeholder-shown,
+input[type="password"]:placeholder-shown,
+input[type="text"]:placeholder-shown {
+  border-bottom: 2px solid rgba(169, 169, 169, 0.6);
+}
+input[type="email"]:invalid,
+input[type="password"]:invalid,
+input[type="text"]:invalid {
+  border-bottom: 2px solid #FF5B37;
 }
 
 input[type="submit"] {
@@ -61,21 +72,55 @@ input[type="submit"] {
   border-radius: 12px;
   font-size: 18px;
 }
+input[type="submit"]:disabled {
+  cursor: not-allowed;
+  background-color: #dadada;
+  color: #88888f;
+}
 
 input ::placeholder {
   color: rgba(169, 169, 169, 0.8);
 }
 input:focus,
 textarea:focus,
-select:focus {
+select:focus,
+input:valid,
+textarea:valid,
+select:valid {
   outline: none;
-  border-bottom: 1.5px solid var(--primary-color);
+  border-bottom: 2px solid var(--primary-color);
 }
 
-eye {
+input:valid ~ .input-icon {
+  color: var(--primary-color);
+}
+input:placeholder-shown ~ .input-icon{
+  color: #88888f;
+}
+
+.eye {
   position: absolute;
   top: 1.4rem;
   right: 0;
   cursor: pointer;
   user-select: none;
+}
+.alert-danger {
+  color: #842029;
+  background-color: #f8d7da;
+  border-color: #f5c2c7;
+  padding: 1rem;
+  margin-bottom: 1rem;
+  border: 1px solid transparent;
+  border-radius: 0.25rem;
+}
+
+.alert-success {
+  color: #0f5132;
+  background-color: #d1e7dd;
+  border-color: #badbcc;
+  padding: 1rem;
+  margin-bottom: 1rem;
+  border: 1px solid transparent;
+  border-radius: 0.25rem;
 }

@@ -13,7 +13,7 @@ function AuthLayout({ children, title = "LukiPay" }) {
         <title>{title}</title>
       </Head>
       <div className={style.wave2}>
-        <Image src={LoginWave} layout="" objectFit="fill" quality={100} />
+        <Image src={LoginWave} layout="" objectFit="fill" quality={100} alt='wave' />
       </div>
       <div className={style.wrapper}>
         <div className={style.section}>

@@ -43,7 +43,7 @@ const authReducer = (prevState = initialState, action) => {
         // loginData: action.payload.data,
         pin: false,
         token: false,
-        isError: false,
+        isError: true,
         errorMsg: action.payload.errorMsg
       };
     case DELETE_AUTH:

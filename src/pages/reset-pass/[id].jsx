@@ -9,7 +9,8 @@ import axios from "axios";
 function ResetPass() {
   const [newPass, setNew] = useState("");
   const [confirm, setConfirm] = useState("");
-  const [msg, setmsg] = useState("");
+  const [errmsg, seterrmsg] = useState(false);
+  const [success, setSuccess] = useState(false);
   const router = useRouter();
   const params = router.query.id;
   // console.log(params);
@@ -20,6 +21,8 @@ function ResetPass() {
       newPassword: newPass,
       confirmPassword: confirm,
     };
+    setSuccess(false);
+    seterrmsg(false);
     try {
       const result = await axios({
         method: "PATCH",
@@ -27,22 +30,29 @@ function ResetPass() {
         data: body,
       });
       console.log(result);
-      setmsg(result.data.msg)
+      setSuccess(result.data.msg);
+      seterrmsg(false);
     } catch (error) {
       console.error(error);
-      {error.response? setmsg(error.response.data.msg): setmsg(error.response)}
+      {
+        error.response
+          ? seterrmsg(error.response.data.msg)
+          : seterrmsg(error.response);
+      }
     }
   };
   return (
     <AuthLayout title="New Pass | LukiPay">
-      <header className={style.header}>
-        Did You Forgot Your Password? Don't Worry, You Can Reset Your Password
-        In a Minutes.
-      </header>
-      <div className={style.info}>
-        To reset your password, you must type your e-mail and we will send a
-        link to your email and you will be directed to the reset password
-        screens.
+      <div className="header-wrapper">
+        <header className={style.header}>
+          Did You Forgot Your Password? Don`t Worry, You Can Reset Your Password
+          In a Minutes.
+        </header><br/>
+        <div className={style.info}>
+          To reset your password, you must type your e-mail and we will send a
+          link to your email and you will be directed to the reset password
+          screens.
+        </div>
       </div>
       <div className={style.formwrapper}>
         <PasswordInput
@@ -55,8 +65,18 @@ function ResetPass() {
           id="confirm"
           setPass={setConfirm}
         />
-        {msg?msg:<></>}
-        <SubmitBtn value={"Confirm"} onClick={resetHandler} />
+        {errmsg ? (
+          <div className="alert-danger">{errmsg}</div>
+        ) : success ? (
+          <div className="alert-success">{success}</div>
+        ) : (
+          <></>
+        )}
+        <SubmitBtn
+          value={"Confirm"}
+          onClick={resetHandler}
+          disabled={!newPass || !confirm}
+        />
       </div>
     </AuthLayout>
   );

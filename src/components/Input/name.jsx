@@ -3,9 +3,6 @@ import { MdPerson } from "react-icons/md";
 function NameInput({ placeholder, name, setName }) {
   return (
     <div className="input-wrapper">
-      <i>
-        <MdPerson />
-      </i>
       <input
         type="text"
         name={name}
@@ -13,6 +10,9 @@ function NameInput({ placeholder, name, setName }) {
         placeholder={placeholder}
         onChange={(e) => setName(e.target.value)}
       />
+      <i className="input-icon">
+        <MdPerson />
+      </i>
     </div>
   );
 }

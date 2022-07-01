@@ -9,9 +9,6 @@ function PasswordInput({
   const [eye, setEye] = useState(false);
   return (
     <div className="input-wrapper">
-      <i>
-        <MdLockOutline />
-      </i>
       <input
         type={!eye ? "password" : "text"}
         name="pass"
@@ -22,9 +19,12 @@ function PasswordInput({
           setPass(e.target.value);
         }}
       />
-      <eye onClick={() => setEye(!eye)}>
-        {!eye ? <MdVisibilityOff /> : <MdVisibility />}
-      </eye>
+      <i className="input-icon">
+        <MdLockOutline />
+      </i>
+      <i className="eye" onClick={() => setEye(!eye)}>
+        {!eye ? <MdVisibilityOff style={{color: '#88888f'}}/> : <MdVisibility />}
+      </i>
     </div>
   );
 }

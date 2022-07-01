@@ -38,6 +38,10 @@
   text-align: right;
 }
 
+.forgot2:hover{
+  text-decoration: underline;
+}
+
 .sectionwrapper {
   /* width: 100%; */
   height: 90%;
