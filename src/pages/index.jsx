@@ -4,7 +4,6 @@ import Image from "next/image";
 import style from "styles/Home.module.css";
 import Wave from "assets/IMG/landing-page-wave.svg";
 
-
 export default function Home() {
   return (
     <>
@@ -33,6 +32,8 @@ export default function Home() {
           href="/favicon-16x16.png"
         />
         <link rel="manifest" href="/site.webmanifest" />
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin />
       </Head>
       <Navbar />
       <section className={style.section1}>
@@ -47,7 +48,7 @@ export default function Home() {
           <button className={style.section1btn}>Try It Free</button>
         </main>
         <section className={style.section1side}>
-          <Image src={Wave} objectPosition="absolute" alt='wave' />
+          <Image src={Wave} objectPosition="absolute" alt="wave" />
         </section>
       </section>
       <footer className={style.footer}>
