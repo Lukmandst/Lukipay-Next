@@ -2,7 +2,7 @@ import Navbar from "components/Navbar";
 import Head from "next/head";
 import Image from "next/image";
 import style from "styles/Home.module.css";
-import Wave from "assets/IMG/landing-page-wave.svg";
+import Wave from "../../public/IMG/landing-page-wave.svg";
 
 export default function Home() {
   return (

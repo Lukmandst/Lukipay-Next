@@ -1,9 +1,9 @@
 import Head from "next/head";
 import React from "react";
 import style from "styles/Auth.module.css";
-import LoginWave from "assets/IMG/login-wave.svg";
+import LoginWave from "../../public/IMG/login-wave.svg";
 import Link from "next/link";
-import Phone from "assets/IMG/dualphone.png";
+import Phone from "../../public/IMG/dualphone.png";
 import Image from "next/image";
 
 function AuthLayout({ children, title = "LukiPay" }) {
