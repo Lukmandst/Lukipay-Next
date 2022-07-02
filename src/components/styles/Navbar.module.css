@@ -29,6 +29,10 @@
   background-color: transparent;
   color: #fff;
 }
+.loginbutton:hover {
+  color: #6379f4;
+  border: 3px solid #6379f4;
+}
 .signupbutton {
   font-weight: 700;
   font-size: 18px;
@@ -38,6 +42,10 @@
   border-radius: 12px;
   background-color: #fff;
   color: #6379f4;
+}
+.signupbutton:hover{
+  color: #fff;
+  background-color: #6379f4
 }
 .profileMenu {
   display: flex;
