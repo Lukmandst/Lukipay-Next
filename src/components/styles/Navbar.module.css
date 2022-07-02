@@ -21,8 +21,9 @@
 }
 .loginbutton {
   font-weight: 700;
-  height: 40px;
-  width: 125px;
+  font-size: 18px;
+  height: 55px;
+  width: 130px;
   border-radius: 12px;
   border: 3px solid #fff;
   background-color: transparent;
@@ -30,14 +31,30 @@
 }
 .signupbutton {
   font-weight: 700;
-  height: 40px;
-  width: 125px;
+  font-size: 18px;
+  height: 55px;
+  width: 130px;
   border: none;
   border-radius: 12px;
   background-color: #fff;
   color: #6379f4;
 }
+.profileMenu{
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+}
 
+.profImg {
+  width: 52px;
+  height: 52px;
+  border-radius: 10px;
+}
+.notif{
+  position: relative;
+  width: 30px;
+  height: 30px;
+}
 @media screen and (max-width: 426px) {
   .header {
     flex-direction: column;
