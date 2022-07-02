@@ -1,0 +1,78 @@
+.container {
+  display: grid;
+  height: 100%;
+  padding: 0 10%;
+  margin: 10px 0;
+  grid-template-columns: 1fr 2fr;
+  grid-template-rows: 1fr 1.75fr;
+  grid-template-areas:
+    "navigation main"
+    "navigation main";
+  gap: 0.7rem;
+}
+
+.main {
+  grid-area: main;
+  background-color: #fff;
+  border-radius: 20px;
+}
+
+.dashboardMain {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: 1fr 1.75fr;
+  grid-template-areas:
+    "head head"
+    "body1 body2";
+  gap: 0.7rem;
+}
+.navigation {
+  padding: 40px 30px;
+  grid-area: navigation;
+  background: #ffffff;
+  box-shadow: 0px 4px 20px rgba(0, 0, 0, 1);
+  border-radius: 25px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+.navMenu {
+  height: 80px;
+  border: 1px solid black;
+}
+
+.mainSection {
+  grid-area: head;
+  background-color: #6379f4;
+  border-radius: 20px;
+}
+.section1 {
+  grid-area: body1;
+  background: #ffffff;
+  box-shadow: 0px 4px 20px rgba(0, 0, 0, 1);
+  border-radius: 25px;
+}
+
+.section2 {
+  grid-area: body2;
+  background: #ffffff;
+  box-shadow: 0px 4px 20px rgba(0, 0, 0, 1);
+  border-radius: 25px;
+}
+
+@media screen and (max-width: 768px) {
+  .container {
+    grid-template-columns: 1fr;
+    grid-template-rows: 0.5fr 0.2fr;
+    grid-template-areas:
+      "main"
+      "navigation";
+  }
+  .navigation {
+    flex-direction: row;
+  }
+  .menuWrapper {
+    display: flex;
+    flex-direction: row;
+  }
+}
