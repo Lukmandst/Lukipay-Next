@@ -8,8 +8,6 @@ import thunk from "redux-thunk";
 import logger from "redux-logger";
 import { persistStore, persistReducer } from "redux-persist";
 import storage from "redux-persist/lib/storage";
-
-import reducers from "./reducers";
 import authReducer from "./reducers/authReducer";
 
 const rootPersistConfig = {
