@@ -16,6 +16,7 @@ export const authLogin = (data) => {
         data: false,
         errorMsg: false,
         isError: false,
+        id: false,
       },
     });
     axios({
@@ -34,6 +35,7 @@ export const authLogin = (data) => {
             data: result.data.data,
             pin: result.data.data.pin,
             token: result.data.data.token,
+            id: result.data.data.id,
             errorMsg: false,
             isError: false,
           },

@@ -20,7 +20,7 @@ const rootPersistConfig = {
 const authPersistConfig = {
   key: "authReducer",
   storage,
-  whitelist: ["token", "pin"],
+  whitelist: ["token", "pin", "id"],
 };
 
 const storeReducer = combineReducers({

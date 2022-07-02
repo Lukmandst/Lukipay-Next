@@ -12,6 +12,7 @@ const initialState = {
   errorMsg: false,
   token: false,
   pin: false,
+  id: false,
 };
 
 const authReducer = (prevState = initialState, action) => {
@@ -25,6 +26,7 @@ const authReducer = (prevState = initialState, action) => {
         errorMsg: false,
         pin: false,
         token: false,
+        id: false,
       };
     case POST_USER_LOGIN_SUCCESS:
       return {
@@ -35,6 +37,7 @@ const authReducer = (prevState = initialState, action) => {
         pin: action.payload.pin,
         isError: false,
         errorMsg: false,
+        id: action.payload.id,
       };
     case POST_USER_LOGIN_FAIL:
       return {
@@ -43,6 +46,7 @@ const authReducer = (prevState = initialState, action) => {
         // loginData: action.payload.data,
         pin: false,
         token: false,
+        id: false,
         isError: true,
         errorMsg: action.payload.errorMsg
       };
