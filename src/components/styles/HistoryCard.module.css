@@ -1,0 +1,42 @@
+.historyCard{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .infoWrapperHistory{
+    display: flex;
+    gap: 10px;
+  }
+  .imgHistory{
+    border-radius: 10px;
+  }
+  .nameHistory{
+    font-weight: 700;
+    font-size: 16px;
+  }
+  .typeHistory{
+    text-transform: capitalize;
+    font-weight: 400;
+    font-size: 14px;
+  }
+  .nametypeWrapper{
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    justify-content: center;
+  }
+  .amountHistoryGreen{
+    font-size: 18px;
+    font-weight: 700;
+    color: #1ec15f;
+  }
+  .amountHistoryRed{
+    font-size: 18px;
+    font-weight: 700;
+    color: #ff5b37;
+  }
+  .amountHistoryGray{
+    font-size: 18px;
+    font-weight: 700;
+    color: #6a6a6a
+  }

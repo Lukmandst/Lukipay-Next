@@ -1,4 +1,4 @@
-import GetUser from "api";
+import {  GetUser } from "api";
 import Image from "next/image";
 import { MdNotificationsNone } from "react-icons/md";
 import { useDispatch, useSelector } from "react-redux";
@@ -9,6 +9,7 @@ import { resetAuth } from "reduxStore/actions/authActions";
 function NavbarAfterLogin() {
   const { token, id } = useSelector((state) => state.auth);
   const { user, isLoading, isError } = GetUser(id, token);
+  
   const dispatch = useDispatch();
   if (isError) {
     dispatch(resetAuth());

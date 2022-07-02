@@ -1,0 +1,43 @@
+.historyMain {
+  padding: 2% 4%;
+  background: #ffffff;
+  box-shadow: 0px 4px 20px rgb(0 0 0);
+  border-radius: 25px;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  height: auto;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.title {
+  font-weight: 700;
+  font-size: 18px;
+}
+.filter {
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  background: rgba(58, 61, 66, 0.1);
+  border-radius: 12px;
+  width: 155px;
+  height: 40px;
+  text-align: center;
+  align-items: center;
+}
+
+.mainSection {
+  height: auto;
+  max-height: 65vh;
+  /* height: 80vh; */
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  justify-content: space-between;
+  overflow-y: scroll;
+}
