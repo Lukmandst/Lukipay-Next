@@ -17,6 +17,7 @@
   /* align-items: center; */
   /* background-color: aqua; */
 }
+
 .header {
   width: 80%;
   font-weight: 700;
@@ -38,7 +39,7 @@
   text-align: right;
 }
 
-.forgot2:hover{
+.forgot2:hover {
   text-decoration: underline;
 }
 
@@ -73,7 +74,7 @@
 .wave2 {
   display: none;
 }
-.formwrapper{
+.formwrapper {
   gap: 1rem;
   display: flex;
   flex-direction: column;
@@ -118,13 +119,12 @@
     font-size: 50px;
     color: #fff;
   }
-
 }
 @media screen and (max-width: 426px) {
-  .header{
+  .header {
     display: none;
   }
-  .main{
+  .main {
     margin: 0 25px;
     padding: 2rem 3rem;
   }

@@ -1,12 +1,18 @@
 import GetUser from "api";
 import Image from "next/image";
 import { MdNotificationsNone } from "react-icons/md";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import style from "components/styles/Navbar.module.css";
+import { formatPhoneNumber } from "helpers/formatter";
+import { resetAuth } from "reduxStore/actions/authActions";
 
 function NavbarAfterLogin() {
   const { token, id } = useSelector((state) => state.auth);
   const { user, isLoading, isError } = GetUser(id, token);
+  const dispatch = useDispatch();
+  if (isError) {
+    dispatch(resetAuth());
+  }
   return (
     <div className={style.profileMenu}>
       <div className={style.profImg}>
@@ -30,7 +36,7 @@ function NavbarAfterLogin() {
             color: "rgba(58, 61, 66, 0.9)",
           }}
         >
-          {user && user.noTelp}
+          {user && formatPhoneNumber(user.noTelp)}
         </div>
       </div>
       <MdNotificationsNone className={style.notif} />

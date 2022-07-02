@@ -1,4 +1,4 @@
-import axios from 'axios'
+import axios from "axios";
 
 export const POST_USER_LOGIN = "POST_USER_LOGIN";
 export const POST_USER_LOGIN_SUCCESS = "POST_USER_LOGIN_SUCCESS";
@@ -58,7 +58,9 @@ export const authLogin = (data) => {
 };
 
 export const resetAuth = () => {
-  return dispatch({
-    type: DELETE_AUTH,
-  });
+  return (dispatch) => {
+    dispatch({
+      type: DELETE_AUTH,
+    });
+  };
 };
