@@ -33,8 +33,9 @@ function Modal({ header = "Topup", setModal }) {
         // console.log(url);
         window.open(`${url}`);
         setTimeout(() => {
-          setModal(false);
-        }, 3000);
+          setModal(false)
+          document.querySelector("body").style.overflow = "visible";
+        }, 10000);
       }
     } catch (error) {
       console.error(error);
@@ -49,7 +50,14 @@ function Modal({ header = "Topup", setModal }) {
       <main className={style.main}>
         <header className={style.header}>
           <div>{header}</div>
-          <div onClick={() => setModal(false)}>X</div>
+          <div
+            onClick={() => {
+              setModal(false);
+              document.querySelector("body").style.overflow = "visible";
+            }}
+          >
+            X
+          </div>
         </header>
         <body className={style.body}>
           <div className={style.bodyInfo}>

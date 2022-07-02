@@ -13,7 +13,7 @@ function Dashboard() {
   const [modal, setModal] = useState(false);
   const { id, token } = useSelector((state) => state.auth);
   const { user } = GetUser(id, token);
-  
+
   return (
     <>
       {modal && <Modaltopup setModal={setModal} />}
@@ -34,7 +34,13 @@ function Dashboard() {
                   <h3>Transfer</h3>
                 </div>
               </Link>
-              <div className={style.topUpBtn} onClick={() => setModal(true)}>
+              <div
+                className={style.topUpBtn}
+                onClick={() => {
+                  setModal(true);
+                  document.querySelector("body").style.overflow = "hidden";
+                }}
+              >
                 <HiOutlinePlus className={style.icon} />
                 <h3>Top Up</h3>
               </div>
