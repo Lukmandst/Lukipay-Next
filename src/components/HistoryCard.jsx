@@ -35,7 +35,9 @@ function HistoryCard({ history }) {
             + {currencyFormatter.format(history.amount)}
           </div>
         ) : (
-          <></>
+          <div className={style.amountHistoryGray}>
+            {currencyFormatter.format(history.amount)}
+          </div>
         )}
       </div>
     </>
