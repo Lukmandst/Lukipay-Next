@@ -22,7 +22,7 @@ function HistoryCard({ history }) {
             <div className={style.typeHistory}>{history.type}</div>
           </div>
         </div>
-        {history.type === "transfer" && history.status === "success" ? (
+        {history.type === "send" && history.status === "success" ? (
           <div className={style.amountHistoryRed}>
            - {currencyFormatter.format(history.amount)}
           </div>
