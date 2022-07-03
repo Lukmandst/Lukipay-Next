@@ -6,15 +6,16 @@ import EmailInput from "components/Input/email";
 import PasswordInput from "components/Input/pass";
 import AuthLayout from "components/AuthLayout";
 import SubmitBtn from "components/Buttons/submit";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { authLogin } from "reduxStore/actions/authActions";
+import { useRouter } from "next/router";
 
 function Login() {
   const [email, setEmail] = useState("");
   const [pass, setPass] = useState("");
-  const { errorMsg } = useSelector((state) => state.auth);
-
+  const { errorMsg, token, pin } = useSelector((state) => state.auth);
+  const router = useRouter();
   const dispatch = useDispatch();
   const loginHandler = () => {
     const body = {
@@ -22,9 +23,17 @@ function Login() {
       password: pass,
     };
     // console.log(body);
-    
+
     dispatch(authLogin(body));
   };
+  useEffect(() => {
+    if (!pin && token) {
+      router.push("/createpin");
+    }
+    if (pin && token) {
+      router.push("/dashboard");
+    }
+  }, [token]);
   return (
     <>
       <AuthLayout title="Login | LukiPay">

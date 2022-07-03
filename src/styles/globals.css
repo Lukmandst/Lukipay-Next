@@ -31,7 +31,7 @@ button {
   cursor: pointer;
 }
 
-.input-wrapper {
+.inputwrapper {
   display: flex;
   position: relative;
   /* border-bottom: 1.5px solid rgba(169, 169, 169, 0.6); */

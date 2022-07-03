@@ -2,7 +2,7 @@ import DashboardLayout from "components/DashboardLayout";
 
 function Profile() {
   return (
-    <DashboardLayout title="Profile | LukiPay">
+    <DashboardLayout title="Profile | LukiPay" active="profile">
       <div>Profile</div>
     </DashboardLayout>
   );

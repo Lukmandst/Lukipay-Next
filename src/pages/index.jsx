@@ -1,10 +1,20 @@
 import Navbar from "components/Navbar";
 import Head from "next/head";
 import Image from "next/image";
+import { useRouter } from "next/router";
+import { useEffect } from "react";
+import { useSelector } from "react-redux";
 import style from "styles/Home.module.css";
 import Wave from "../../public/IMG/landing-page-wave.svg";
 
 export default function Home() {
+  const { token, pin } = useSelector((state) => state.auth);
+  const router = useRouter();
+  useEffect(() => {
+    if (pin && token) {
+      router.push("/dashboard");
+    }
+  }, [pin]);
   return (
     <>
       <Head>

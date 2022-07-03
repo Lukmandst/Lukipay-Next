@@ -8,7 +8,7 @@ function PasswordInput({
 }) {
   const [eye, setEye] = useState(false);
   return (
-    <div className="input-wrapper">
+    <div className="inputwrapper">
       <input
         type={!eye ? "password" : "text"}
         name="pass"

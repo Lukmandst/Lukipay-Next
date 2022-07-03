@@ -1,11 +1,17 @@
 .historyCard{
+  cursor: pointer;
     display: flex;
     justify-content: space-between;
     align-items: center;
+    border-radius: 12px;
+  }
+  .historyCard:hover{
+    background-color: rgba(58, 61, 66, 0.1)
   }
   .infoWrapperHistory{
     display: flex;
-    gap: 10px;
+    gap: 25px;
+    justify-content: space-between;
   }
   .imgHistory{
     border-radius: 10px;

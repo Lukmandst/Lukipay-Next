@@ -2,18 +2,21 @@ import axios from "axios";
 import Link from "next/link";
 import { useState } from "react";
 import { useSelector } from "react-redux";
+import Loading from "./Loading";
 import style from "./styles/Modal.module.css";
 
 function Modal({ header = "Topup", setModal }) {
   const [amount, setAmount] = useState("");
   const [successMsg, setSuccessMsg] = useState("");
   const [errmsg, seterrMsg] = useState("");
+  const [loading, setLoading] = useState(false);
 
   const { token } = useSelector((state) => state.auth);
 
   const topUpHandler = async () => {
     // console.log(amount.length);
     seterrMsg(false);
+    setLoading(false);
     const body = {
       amount: amount,
     };
@@ -21,6 +24,7 @@ function Modal({ header = "Topup", setModal }) {
       if (amount.length < 1) {
         seterrMsg("The minimum amount is Rp 10.000");
       } else {
+        setLoading(true);
         const topUpResult = await axios({
           method: "POST",
           url: `${process.env.NEXT_PUBLIC_HOST_API}/transaction/top-up`,
@@ -28,14 +32,15 @@ function Modal({ header = "Topup", setModal }) {
           headers: { Authorization: `Bearer ${token}` },
         });
         const url = await topUpResult.data.data.redirectUrl;
+        setLoading(false);
         seterrMsg(false);
         setSuccessMsg(url);
         // console.log(url);
         window.open(`${url}`);
         setTimeout(() => {
-          setModal(false)
+          setModal(false);
           document.querySelector("body").style.overflow = "visible";
-        }, 10000);
+        }, 15000);
       }
     } catch (error) {
       console.error(error);
@@ -43,6 +48,7 @@ function Modal({ header = "Topup", setModal }) {
         ? error.response.data.msg
         : error.message;
       seterrMsg(err);
+      setLoading(false);
     }
   };
   return (
@@ -86,13 +92,17 @@ function Modal({ header = "Topup", setModal }) {
             <></>
           )}
         </body>
-        <footer className={style.footer}>
-          <input
-            type="submit"
-            onClick={topUpHandler}
-            disabled={amount.length < 5}
-          ></input>
-        </footer>
+        {loading ? (
+          <Loading />
+        ) : (
+          <footer className={style.footer}>
+            <input
+              type="submit"
+              onClick={topUpHandler}
+              disabled={amount.length < 5}
+            />
+          </footer>
+        )}
       </main>
     </div>
   );

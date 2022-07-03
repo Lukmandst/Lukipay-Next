@@ -2,7 +2,7 @@ import { MdOutlineEmail } from "react-icons/md";
 
 function EmailInput({ placeholder = "Enter your e-mail", setEmail }) {
   return (
-    <div className="input-wrapper">
+    <div className="inputwrapper">
       <input
         type="email"
         name="email"

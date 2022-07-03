@@ -2,7 +2,7 @@ import { MdPerson } from "react-icons/md";
 
 function NameInput({ placeholder, name, setName }) {
   return (
-    <div className="input-wrapper">
+    <div className="inputwrapper">
       <input
         type="text"
         name={name}

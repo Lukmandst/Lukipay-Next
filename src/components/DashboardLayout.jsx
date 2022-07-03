@@ -12,17 +12,22 @@ import style from "styles/Dashboard.module.css";
 import Link from "next/link";
 import TopupModal from "./Modal";
 import ReusableModal from "./ReusableModal";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { resetAuth } from "reduxStore/actions/authActions";
 import { useDispatch, useSelector } from "react-redux";
 import axios from "axios";
+import { useRouter } from "next/router";
 
-function DashboardLayout({ children, title = "LukiPay" }) {
+function DashboardLayout({
+  children,
+  title = "LukiPay",
+  active ,
+}) {
   const [modal, setModal] = useState(false);
   const [modal2, setModal2] = useState(false);
   const { token } = useSelector((state) => state.auth);
   const dispatch = useDispatch();
-
+  const router = useRouter();
   const logOuthandler = async () => {
     try {
       const logOutResut = await axios({
@@ -40,6 +45,11 @@ function DashboardLayout({ children, title = "LukiPay" }) {
       console.error(error);
     }
   };
+  useEffect(() => {
+    if (!token) {
+      router.push("/login");
+    }
+  }, [router, token]);
 
   return (
     <div>
@@ -61,13 +71,21 @@ function DashboardLayout({ children, title = "LukiPay" }) {
         <nav className={style.navigation}>
           <div className={style.menuWrapper}>
             <Link href={"/dashboard"}>
-              <div className={style.navMenu}>
+              <div
+                className={
+                  active === "dashboard" ? style.navMenuActive : style.navMenu
+                }
+              >
                 <MdOutlineDashboard className={style.icon} />
                 <h2>Dashboard</h2>
               </div>
             </Link>
             <Link href={"/transfer"}>
-              <div className={style.navMenu}>
+              <div
+                className={
+                  active === "transfer" ? style.navMenuActive : style.navMenu
+                }
+              >
                 <MdOutlineArrowUpward className={style.icon} />
                 <h2>Transfer</h2>
               </div>
@@ -85,7 +103,11 @@ function DashboardLayout({ children, title = "LukiPay" }) {
             </div>
 
             <Link href={"/profile"}>
-              <div className={style.navMenu}>
+              <div
+                className={
+                  active === "profile" ? style.navMenuActive : style.navMenu
+                }
+              >
                 <IoPersonOutline className={style.icon} />
                 <h2>Profile</h2>
               </div>

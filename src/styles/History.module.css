@@ -33,6 +33,7 @@
 
 .mainSection {
   height: auto;
+  min-height: 65vh;
   max-height: 65vh;
   /* height: 80vh; */
   display: flex;

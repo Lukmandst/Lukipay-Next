@@ -5,7 +5,9 @@ import EmailInput from "components/Input/email";
 import NameInput from "components/Input/name";
 import PasswordInput from "components/Input/pass";
 import Link from "next/link";
-import { useState } from "react";
+import { useRouter } from "next/router";
+import { useEffect, useState } from "react";
+import { useSelector } from "react-redux";
 import style from "styles/Auth.module.css";
 
 function Signup() {
@@ -15,7 +17,12 @@ function Signup() {
   const [pass, setPass] = useState("");
   const [errorMsg, setErrorMsg] = useState(false);
   const [successMsg, setSuccesMsg] = useState(false);
+  const [loading, setLoading] = useState(false);
+  const router = useRouter();
+  const { token, pin } = useSelector((state) => state.auth);
+
   const regisHandler = async () => {
+    setLoading(false);
     const body = {
       firstName: firstname,
       lastName: lastname,
@@ -44,15 +51,18 @@ function Signup() {
           "Password should be at least 3 characters and includes at least 1 numeric character !"
         );
       } else {
+        setLoading(true);
         setErrorMsg(false);
         const registResult = await axios({
           method: "POST",
           url: `${process.env.NEXT_PUBLIC_HOST_API}/auth/register`,
           data: body,
         });
+        setLoading(false);
         setSuccesMsg(registResult.data.msg);
       }
     } catch (error) {
+      setLoading(false);
       {
         error.response
           ? setErrorMsg(error.response.data.msg)
@@ -61,6 +71,16 @@ function Signup() {
       // console.log(error);
     }
   };
+  useEffect(() => {
+    if (successMsg) {
+      setTimeout(() => {
+        router.push("/login");
+      }, 3000);
+    }
+    if (pin) {
+      router.push("/dashboard");
+    }
+  }, [successMsg, token]);
 
   return (
     <div>
@@ -102,7 +122,12 @@ function Signup() {
           ) : (
             <></>
           )}
-          <SubmitBtn value={"Sign Up"} onClick={regisHandler} disabled={!firstname || !lastname || !email || !pass} />
+          <SubmitBtn
+            loadingLocal={loading}
+            value={"Sign Up"}
+            onClick={regisHandler}
+            disabled={!firstname || !lastname || !email || !pass}
+          />
           <p style={{ textAlign: "center" }}>
             Already have an account? Let`s
             <span style={{ color: "#6379f4" }}>
