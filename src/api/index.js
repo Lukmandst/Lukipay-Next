@@ -4,7 +4,7 @@ import axios from "axios";
 const fetcher = (url, token) =>
   axios
     .get(url, { headers: { Authorization: `Bearer ${token}` } })
-    .then((res) => res.data.data);
+    .then((res) => res.data);
 
 export function GetUser(id, token) {
   const { data, error } = useSWR(
@@ -56,6 +56,29 @@ export function GetFullHistory(filter = "WEEK", token) {
   );
   return {
     history: data,
+    isLoading: !error && !data,
+    isError: error,
+  };
+}
+export function GetUserinDB(
+  page = "1",
+  limit = "20",
+  search = 'a',
+  filter = "firstName",
+  sort = "ASC",
+  token
+) {
+  const { data, error } = useSWR(
+    [
+      `${process.env.NEXT_PUBLIC_HOST_API}/user?page=${page}&limit=${limit}&search=${search}&sort=${filter} ${sort}`,
+      token,
+    ],
+    fetcher,
+    { refreshInterval: 5000 }
+  );
+  console.log(page, "inipage");
+  return {
+    contactUser: data,
     isLoading: !error && !data,
     isError: error,
   };
