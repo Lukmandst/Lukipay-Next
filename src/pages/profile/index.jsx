@@ -230,6 +230,7 @@ function Profile() {
                 type="button"
                 className={style.button}
                 value="Change Password"
+                onClick={() => router.push(`/profile/changepass`)}
               />
               <i>
                 <MdArrowForward className={style.icon} />
