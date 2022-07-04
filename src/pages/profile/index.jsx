@@ -8,13 +8,73 @@ import { BsPencil } from "react-icons/bs";
 import { MdArrowForward, MdArrowRight } from "react-icons/md";
 import { useSelector } from "react-redux";
 import style from "styles/Profile.module.css";
-import DefaultPic from '../../../public/android-chrome-512x512.png'
-
-
+import DefaultPic from "../../../public/android-chrome-512x512.png";
+import { FiUpload } from "react-icons/fi";
+import axios from "axios";
+import Loading from "components/Loading";
 function Profile() {
   const [modal2, setModal2] = useState(false);
+  const [edit, setEdit] = useState(false);
+  const [image, setImage] = useState(null);
+  const [msg, setMsg] = useState(false);
+  const [errmsg, seterrMsg] = useState(false);
+  
+  const [loadingImg, setLoadingImg] = useState(false);
+  const [previewImg, setPreviewImg] = useState(null);
   const { token, id } = useSelector((state) => state.auth);
   const { user, isLoading, isError } = GetUser(id, token);
+
+  // const handleImage = (e) => {
+  //   if (e.target.files && e.target.files.length > 0) {
+  //     setImage({
+  //       image: URL.createObjectURL(e.target.files[0]),
+  //     });
+  //   }
+  // };
+  const handleImage = (e) => {
+    const file = e.target.files[0];
+    if (file) {
+      const reader = new FileReader();
+      reader.onload = () => {
+        setPreviewImg(reader.result);
+        setImage(file);
+      };
+      reader.readAsDataURL(file);
+      setEdit(true);
+    }
+  };
+  // console.log(image);
+  const updateImgHandler = async () => {
+    try {
+      setMsg(false);
+      seterrMsg(false);
+      setLoadingImg(true);
+      // setIsError(false);
+
+      const body = new FormData();
+      body.append("image", image);
+
+      const uploadResult = await axios({
+        method: "PATCH",
+        url: `${process.env.NEXT_PUBLIC_HOST_API}/user/image/${id}`,
+        data: body,
+        headers: {
+          Authorization: `Bearer ${token}`,
+          "content-type": "multipart/form-data",
+        },
+      });
+      console.log(uploadResult);
+      setMsg(uploadResult.data.msg);
+      setLoadingImg(false);
+      setEdit(false);
+    } catch (error) {
+      // setIsError(true);
+      console.log(error);
+      seterrMsg(error.response ? error.response.data.msg : error.response);
+      setLoadingImg(false);
+      setEdit(false);
+    }
+  };
 
   const logOuthandler = async () => {
     try {
@@ -47,32 +107,80 @@ function Profile() {
         <div className={style.profileMain}>
           <header className={style.header}>
             <div className={style.profImgWrapper}>
-              <Image
-                src={
-                  user && !user.data.image
-                    ? DefaultPic
-                    : `${process.env.NEXT_PUBLIC_IMG}${user && user.data.image}`
-                }
-                alt="profile"
-                layout="fixed"
-                width={80}
-                height={80}
-                className={style.profImg}
-              />
+              {image ? (
+                <Image
+                  src={previewImg}
+                  alt="preview"
+                  objectFit="cover"
+                  layout="fixed"
+                  width={80}
+                  height={80}
+                  className={style.profImg}
+                />
+              ) : (
+                <Image
+                  src={
+                    user && !user.data.image
+                      ? DefaultPic
+                      : `${process.env.NEXT_PUBLIC_IMG}${
+                          user && user.data.image
+                        }`
+                  }
+                  alt="profile"
+                  layout="fixed"
+                  width={80}
+                  height={80}
+                  className={style.profImg}
+                />
+              )}
             </div>
-            <div className={style.edit}>
-              <span
-                style={{
-                  cursor: "pointer",
-                  display: "flex",
-                  gap: "5px",
-                  alignItems: "center",
-                }}
+            <input
+              className="d-none"
+              type="file"
+              id="upload-button"
+              accept="image/*"
+              onChange={handleImage}
+              style={{ display: "none" }}
+            />
+            {loadingImg ? (
+              <Loading />
+            ) : !edit ? (
+              <label htmlFor="upload-button" className={style.edit}>
+                <span
+                  style={{
+                    cursor: "pointer",
+                    display: "flex",
+                    gap: "5px",
+                    alignItems: "center",
+                  }}
+                >
+                  <BsPencil />
+                  Edit
+                </span>
+              </label>
+            ) : (
+              <div
+                htmlFor="upload-button"
+                className={style.edit}
+                onClick={updateImgHandler}
               >
-                <BsPencil />
-                Edit
-              </span>
-            </div>
+                <span
+                  style={{
+                    cursor: "pointer",
+                    display: "flex",
+                    gap: "5px",
+                    alignItems: "center",
+                  }}
+                >
+                  <FiUpload />
+                  Upload
+                </span>
+              </div>
+            )}
+            {msg ? 
+            <div style={{ textAlign: "center", color:'#1EC15F' }}>{msg}</div>:
+            <div style={{ textAlign: "center", color:'#FF5B37' }}>{errmsg}</div>
+             }
             <div style={{ textAlign: "center" }}>
               <div
                 style={{
