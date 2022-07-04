@@ -8,6 +8,9 @@ import { BsPencil } from "react-icons/bs";
 import { MdArrowForward, MdArrowRight } from "react-icons/md";
 import { useSelector } from "react-redux";
 import style from "styles/Profile.module.css";
+import DefaultPic from '../../../public/android-chrome-512x512.png'
+
+
 function Profile() {
   const [modal2, setModal2] = useState(false);
   const { token, id } = useSelector((state) => state.auth);
@@ -45,7 +48,11 @@ function Profile() {
           <header className={style.header}>
             <div className={style.profImgWrapper}>
               <Image
-                src={`${process.env.NEXT_PUBLIC_IMG}${user && user.data.image}`}
+                src={
+                  user && !user.data.image
+                    ? DefaultPic
+                    : `${process.env.NEXT_PUBLIC_IMG}${user && user.data.image}`
+                }
                 alt="profile"
                 layout="fixed"
                 width={80}
