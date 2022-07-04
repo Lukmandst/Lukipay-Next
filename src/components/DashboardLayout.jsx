@@ -59,7 +59,7 @@ function DashboardLayout({
       {modal && <TopupModal setModal={setModal} />}
       {modal2 && (
         <ReusableModal
-          title="LogOut"
+          header="LogOut"
           bodyInfo="Are you sure want to log out?"
           setModal={setModal2}
           yesHandler={logOuthandler}

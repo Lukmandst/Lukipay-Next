@@ -116,7 +116,7 @@ function Dashboard() {
                     You have no transaction yet :(
                   </div>
                 
-               : (
+               : smallHistory && (
                 smallHistory.data.map((result) => (
                   <HistoryCard key={result.id} history={result} />
                 ))

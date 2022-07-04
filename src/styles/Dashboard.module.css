@@ -56,7 +56,7 @@
   gap: 1rem;
   justify-content: left;
 }
-.navMenuActive{
+.navMenuActive {
   cursor: pointer;
   color: #6379f4;
   height: auto;
@@ -92,7 +92,6 @@
 }
 
 .mainB {
-
   display: flex;
   flex-direction: column;
   justify-content: space-evenly;
@@ -209,17 +208,29 @@
   .navMenu {
     padding: 0;
   }
+  .navMenuActive {
+    padding: 0;
+    border-left: none;
+    border-bottom: 5px solid #6379f4;
+  }
   .navMenu > h2 {
+    display: none;
+  }
+  .navMenuActive > h2 {
     display: none;
   }
   .navMenu:hover {
     border-left: none;
     border-bottom: 5px solid #6379f4;
   }
+  .navMenuActive:hover {
+    border-left: none;
+    border-bottom: 5px solid #6379f4;
+  }
 }
 
 @media screen and (max-width: 768px) {
-  .navigation{
+  .navigation {
     min-height: unset;
   }
 }
@@ -228,7 +239,7 @@
   .container {
     padding: 15px;
   }
-  .navigation{
+  .navigation {
     min-height: unset;
   }
   .mainSection {
