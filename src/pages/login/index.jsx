@@ -27,6 +27,7 @@ function Login() {
     dispatch(authLogin(body));
   };
   useEffect(() => {
+    router.prefetch("/dashboard");
     if (!pin && token) {
       router.push("/createpin");
     }

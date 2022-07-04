@@ -12,25 +12,22 @@ import DefaultPic from "../../../public/android-chrome-512x512.png";
 import { FiUpload } from "react-icons/fi";
 import axios from "axios";
 import Loading from "components/Loading";
+import { useRouter } from "next/router";
+
 function Profile() {
   const [modal2, setModal2] = useState(false);
   const [edit, setEdit] = useState(false);
   const [image, setImage] = useState(null);
   const [msg, setMsg] = useState(false);
   const [errmsg, seterrMsg] = useState(false);
-  
+
   const [loadingImg, setLoadingImg] = useState(false);
   const [previewImg, setPreviewImg] = useState(null);
   const { token, id } = useSelector((state) => state.auth);
   const { user, isLoading, isError } = GetUser(id, token);
 
-  // const handleImage = (e) => {
-  //   if (e.target.files && e.target.files.length > 0) {
-  //     setImage({
-  //       image: URL.createObjectURL(e.target.files[0]),
-  //     });
-  //   }
-  // };
+  const router = useRouter();
+
   const handleImage = (e) => {
     const file = e.target.files[0];
     if (file) {
@@ -67,12 +64,18 @@ function Profile() {
       setMsg(uploadResult.data.msg);
       setLoadingImg(false);
       setEdit(false);
+      setTimeout(() => {
+        setMsg(false);
+      }, 2000);
     } catch (error) {
       // setIsError(true);
       console.log(error);
       seterrMsg(error.response ? error.response.data.msg : error.response);
       setLoadingImg(false);
       setEdit(false);
+      setTimeout(() => {
+        seterrMsg(false);
+      }, 2000);
     }
   };
 
@@ -177,10 +180,13 @@ function Profile() {
                 </span>
               </div>
             )}
-            {msg ? 
-            <div style={{ textAlign: "center", color:'#1EC15F' }}>{msg}</div>:
-            <div style={{ textAlign: "center", color:'#FF5B37' }}>{errmsg}</div>
-             }
+            {msg ? (
+              <div style={{ textAlign: "center", color: "#1EC15F" }}>{msg}</div>
+            ) : (
+              <div style={{ textAlign: "center", color: "#FF5B37" }}>
+                {errmsg}
+              </div>
+            )}
             <div style={{ textAlign: "center" }}>
               <div
                 style={{
@@ -213,6 +219,7 @@ function Profile() {
                 type="button"
                 className={style.button}
                 value="Personal Information"
+                onClick={() => router.push(`/profile/${id}`)}
               />
               <i>
                 <MdArrowForward className={style.icon} />
