@@ -42,3 +42,112 @@
   justify-content: space-between;
   overflow-y: scroll;
 }
+
+.detailsMain {
+  padding: 2% 4%;
+  background: #ffffff;
+  box-shadow: 0px 4px 20px rgb(0 0 0);
+  border-radius: 25px;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  height: auto;
+  min-height: 72vh;
+}
+
+.mainSection2 {
+  height: auto;
+  min-height: 60vh;
+  /* max-height: 50vh; */
+  /* height: 80vh; */
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  justify-content: space-between;
+}
+.header2 {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.detailsName {
+  font-size: 16px;
+  font-weight: 400;
+  color: #7a7886;
+}
+.detailsValue {
+  font-weight: 700;
+  font-size: 22px;
+  color: #514f5b;
+}
+.historyFooter {
+  align-items: center;
+  display: flex;
+  justify-content: flex-end;
+  gap: 15px;
+  height: auto;
+}
+
+.statusWrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+  justify-content: center;
+}
+.statusInfo {
+  font-weight: 700;
+  font-size: 22px;
+  color: #4d4b57;
+  text-transform: uppercase;
+  display: flex;
+  gap: 5px;
+  justify-content: center;
+  text-align: center;
+}
+.statusIcon {
+  color: #ffffff;
+  height: 50px;
+  width: 50px;
+}
+.successWrapper {
+  height: 50px;
+  width: 50px;
+  padding: 1rem;
+  background-color: #1ec15f;
+  border-radius: 50px;
+}
+.failedWrapper {
+  height: 50px;
+  width: 50px;
+  padding: 1rem;
+  background-color: #ff5b37;
+  border-radius: 50px;
+}
+.pendingIcon {
+  height: 90px;
+  width: 90px;
+  /* padding: 1rem; */
+  color: #7a7886;
+}
+.historyFooter > input{
+  width: 20%;
+}
+
+.pdfBtn {
+  font-weight: 600;
+  color: #6379F4 !important;
+  background: rgba(99, 121, 244, 0.15) !important;
+  box-shadow: 0px 6px 75px rgba(100, 87, 87, 0.05) ;
+  border-radius: 12px;
+}
+
+@media screen and (max-width: 1024px){
+  .historyFooter{
+    justify-content: center;
+  }
+  .historyFooter > input{
+    width: 40%;
+  }
+}

@@ -2,6 +2,7 @@ import { GetFullHistory } from "api";
 import DashboardLayout from "components/DashboardLayout";
 import HistoryCard from "components/HistoryCard";
 import Loading from "components/Loading";
+import { useRouter } from "next/router";
 import { useState } from "react";
 import { useSelector } from "react-redux";
 import style from "styles/History.module.css";
@@ -10,6 +11,7 @@ function History() {
   const [filter, setFilter] = useState("WEEK");
   const { token } = useSelector((state) => state.auth);
   const { history, isLoading } = GetFullHistory(filter, token);
+  const router = useRouter();
   return (
     <>
       <DashboardLayout title="Transaction | LukiPay" active="dashboard">
@@ -23,8 +25,9 @@ function History() {
           <main className={style.mainSection}>
             {isLoading ? (
               <Loading />
-            ) : history && (
-              history.data.length === 0 ? 
+            ) : (
+              history &&
+              (history.data.length === 0 ? (
                 <div
                   style={{
                     textAlign: "center",
@@ -34,10 +37,29 @@ function History() {
                 >
                   You have no transaction yet :(
                 </div>
-              
-             : 
-              history.data.map((result) => (
-                <HistoryCard key={result.id} history={result} />
+              ) : (
+                history.data.map((result) => (
+                  <div
+                    key={result.id}
+                    className="wrapperrr"
+                    onClick={() =>
+                      router.push({
+                        pathname: `/dashboard/history/${result.id}`,
+                        query: {
+                          fullName: result.fullName,
+                          date: result.createdAt,
+                          type: result.type,
+                          amount: result.amount,
+                          status: result.status,
+                          notes: result.notes,
+                          image: result.image
+                        },
+                      })
+                    }
+                  >
+                    <HistoryCard key={result.id} history={result} />
+                  </div>
+                ))
               ))
             )}
           </main>

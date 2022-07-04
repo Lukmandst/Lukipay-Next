@@ -12,6 +12,7 @@ import Image from "next/image";
 import HistoryCard from "components/HistoryCard";
 import Loading from "components/Loading";
 import WhiteLoading from "components/Loading copy";
+import { useRouter } from "next/router";
 
 function Dashboard() {
   const [modal, setModal] = useState(false);
@@ -19,7 +20,7 @@ function Dashboard() {
   const { user, isLoading } = GetUser(id, token);
   const { dashboard, isLoading: loadingDashboard } = GetDashboard(id, token);
   const { smallHistory } = GetSmallHistory(token);
-
+  const router = useRouter();
   console.log(smallHistory);
   // if (isLoading) return <Loading />;
   return (
@@ -104,21 +105,39 @@ function Dashboard() {
             <div className={style.historyInfo}>
               {loadingDashboard ? (
                 <Loading />
-              ) : smallHistory && 
-                smallHistory.data.length === 0 ?
-                  <div
-                    style={{
-                      textAlign: "center",
-                      marginTop: "25%",
-                      fontWeight: "700",
-                    }}
-                  >
-                    You have no transaction yet :(
-                  </div>
-                
-               : smallHistory && (
+              ) : smallHistory && smallHistory.data.length === 0 ? (
+                <div
+                  style={{
+                    textAlign: "center",
+                    marginTop: "25%",
+                    fontWeight: "700",
+                  }}
+                >
+                  You have no transaction yet :(
+                </div>
+              ) : (
+                smallHistory &&
                 smallHistory.data.map((result) => (
-                  <HistoryCard key={result.id} history={result} />
+                  <div
+                    key={result.id}
+                    className="wrapperrr"
+                    onClick={() =>
+                      router.push({
+                        pathname: `/dashboard/history/${result.id}`,
+                        query: {
+                          fullName: result.fullName,
+                          date: result.createdAt,
+                          type: result.type,
+                          amount: result.amount,
+                          status: result.status,
+                          notes: result.notes,
+                          image: result.image,
+                        },
+                      })
+                    }
+                  >
+                    <HistoryCard key={result.id} history={result} />
+                  </div>
                 ))
               )}
             </div>
