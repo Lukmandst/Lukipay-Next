@@ -62,11 +62,9 @@ function Changepass() {
         <div className={style.infoMain}>
           <main className={style.mainInfoSection}>
             <header className={style.infoHeader}>
-              <div className={style.title}>Personal Information</div>
+              <div className={style.title}>Change Password</div>
               <div className={style.subtitle}>
-                We got your personal information from the sign up proccess. If
-                you want to make changes on your information, contact our
-                support.
+              You must enter your current password and then type your new password twice.
               </div>
             </header>
             {msg ? (
