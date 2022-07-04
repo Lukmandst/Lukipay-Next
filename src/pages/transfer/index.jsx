@@ -4,7 +4,8 @@ import HistoryCard from "components/HistoryCard";
 import Loading from "components/Loading";
 import Link from "next/link";
 import { useRouter } from "next/router";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { HiOutlineSearch } from "react-icons/hi";
 import { useSelector } from "react-redux";
 import style from "styles/Transfer.module.css";
 
@@ -47,7 +48,7 @@ function Transfer() {
   const [page, setPage] = useState(1);
   const { token } = useSelector((state) => state.auth);
   const router = useRouter();
-
+console.log(router.query)
   const { contactUser, isLoading, isError } = GetUserinDB(
     page,
     limit,
@@ -60,22 +61,30 @@ function Transfer() {
   console.log(contactUser);
   // console.log(token)
   console.log(isError);
+  useEffect(()=>{
+
+    router.push(`/transfer/?page=${page}&name=${search}`, `/transfer/?page=${page}&name=${search}`, { shallow: true })
+  },[page, search])
 
   return (
     <DashboardLayout title="Transfer | LukiPay" active="transfer">
       <div className={style.transferMain}>
         <header className={style.header}>
           <div className={style.title}>Search Receiver</div>
-          <input
-            type="search"
-            name="search"
-            id="search"
-            onChange={(e) => {
-              setTimeout(() => {
-                setSearch(e.target.value);
-              }, 1500);
-            }}
-          />
+          <div className={style.searchwrapper}>
+            <HiOutlineSearch className={style.search}/>
+            <input
+              type="search"
+              name="search"
+              id="search"
+              placeholder="Search receiver here"
+              onChange={(e) => {
+                setTimeout(() => {
+                  setSearch(e.target.value);
+                }, 1500);
+              }}
+            />
+          </div>
         </header>
         <main className={style.mainSection}>
           {isLoading ? (
