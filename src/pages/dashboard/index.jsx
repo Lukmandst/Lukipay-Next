@@ -104,8 +104,8 @@ function Dashboard() {
             <div className={style.historyInfo}>
               {loadingDashboard ? (
                 <Loading />
-              ) : smallHistory ? (
-                smallHistory.data.length === 0 && (
+              ) : smallHistory && 
+                smallHistory.data.length === 0 ?
                   <div
                     style={{
                       textAlign: "center",
@@ -115,8 +115,8 @@ function Dashboard() {
                   >
                     You have no transaction yet :(
                   </div>
-                )
-              ) : (
+                
+               : (
                 smallHistory.data.map((result) => (
                   <HistoryCard key={result.id} history={result} />
                 ))

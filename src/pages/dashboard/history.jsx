@@ -23,8 +23,8 @@ function History() {
           <main className={style.mainSection}>
             {isLoading ? (
               <Loading />
-            ) : history ? (
-              history.data.length === 0 && (
+            ) : history && (
+              history.data.length === 0 ? 
                 <div
                   style={{
                     textAlign: "center",
@@ -34,8 +34,8 @@ function History() {
                 >
                   You have no transaction yet :(
                 </div>
-              )
-            ) : (
+              
+             : 
               history.data.map((result) => (
                 <HistoryCard key={result.id} history={result} />
               ))
