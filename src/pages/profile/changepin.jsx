@@ -48,6 +48,7 @@ function Changepin() {
         setMsg(pinResult.data.msg);
         setConfirm(true);
         setPinCode("");
+        setPinCode2("");
         setTimeout(() => {
           setMsg(false);
           setPinCode("");
@@ -61,6 +62,7 @@ function Changepin() {
       seterrMsg(err);
       setLoadingUpdate(false);
       setPinCode("");
+      setPinCode2("");
       setTimeout(() => {
         seterrMsg(false);
         setPinCode("");
@@ -95,7 +97,7 @@ function Changepin() {
         setConfirm(true);
         setTimeout(() => {
           setMsg(false);
-          setPinCode("");
+          setPinCode2("");
           setTimeout(() => {
             router.push("/dashboard");
           }, 1000);
@@ -140,7 +142,7 @@ function Changepin() {
                   type="number"
                   fields={6}
                   onChange={handlePinChange}
-                  value={pin.length === 0 ? "" : pin && pin}
+                  value={pin}
                 />
                 {msg ? (
                   <div style={{ textAlign: "center", color: "#1EC15F" }}>
@@ -174,15 +176,7 @@ function Changepin() {
                   Type your new 6 digits security PIN to use in Zwallet.
                 </div>
               </header>
-              {msg ? (
-                <div style={{ textAlign: "center", color: "#1EC15F" }}>
-                  {msg}
-                </div>
-              ) : (
-                <div style={{ textAlign: "center", color: "#FF5B37" }}>
-                  {errmsg}
-                </div>
-              )}
+              
               <div
                 className={style.mainSection2}
                 style={{ width: "50%", margin: "auto" }}
@@ -195,6 +189,15 @@ function Changepin() {
                   onChange={handlePinChange2}
                   value={pin2}
                 />
+                {msg ? (
+                <div style={{ textAlign: "center", color: "#1EC15F" }}>
+                  {msg}
+                </div>
+              ) : (
+                <div style={{ textAlign: "center", color: "#FF5B37" }}>
+                  {errmsg}
+                </div>
+              )}
                 <footer className={style.transferFooter}>
                   {loadingUpdate ? (
                     <Loading />

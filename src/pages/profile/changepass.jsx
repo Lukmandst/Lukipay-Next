@@ -73,13 +73,7 @@ function Changepass() {
                 password twice.
               </div>
             </header>
-            {msg ? (
-              <div style={{ textAlign: "center", color: "#1EC15F" }}>{msg}</div>
-            ) : (
-              <div style={{ textAlign: "center", color: "#FF5B37" }}>
-                {errmsg}
-              </div>
-            )}
+            
             <div
               className={style.mainSection2}
               style={{ width: "50%", margin: "auto" }}
@@ -102,6 +96,13 @@ function Changepass() {
                 placeholder="Repeat new Password"
                 setPass={setConfirm}
               />
+              {msg ? (
+              <div style={{ textAlign: "center", color: "#1EC15F" }}>{msg}</div>
+            ) : (
+              <div style={{ textAlign: "center", color: "#FF5B37" }}>
+                {errmsg}
+              </div>
+            )}
               <footer className={style.transferFooter}>
                 {loadingUpdate ? (
                   <Loading />
