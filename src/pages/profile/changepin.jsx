@@ -139,7 +139,7 @@ function Changepin() {
                 <ReactCodeInput
                   className={stylePin.reactPIN}
                   id="pinCode"
-                  type="number"
+                  type="password"
                   fields={6}
                   onChange={handlePinChange}
                   value={pin}
@@ -183,8 +183,8 @@ function Changepin() {
               >
                 <ReactCodeInput
                   className={stylePin.reactPIN}
-                  id="pinCode"
-                  type="number"
+                  id="pinCode2"
+                  type="password"
                   fields={6}
                   onChange={handlePinChange2}
                   value={pin2}
