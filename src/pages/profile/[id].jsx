@@ -181,7 +181,7 @@ function Info() {
                           {user && formatPhoneNumber(user.data.noTelp)}
                         </div>
                       ) : (
-                        <div>Set phone number!</div>
+                        <div className={style.detailsValue}>Set phone number!</div>
                       )}
                     </div>
                     <div
