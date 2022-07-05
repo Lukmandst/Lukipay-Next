@@ -129,3 +129,11 @@
   font-size: 22px;
   color: #514f5b;
 }
+.pagination{
+  display: flex;
+  justify-content: center;
+}
+.pagination2{
+  display: flex;
+  gap: 1rem;
+}

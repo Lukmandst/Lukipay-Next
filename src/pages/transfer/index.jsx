@@ -48,7 +48,7 @@ function Transfer() {
   const [page, setPage] = useState(1);
   const { token } = useSelector((state) => state.auth);
   const router = useRouter();
-console.log(router.query)
+  console.log(router.query);
   const { contactUser, isLoading, isError } = GetUserinDB(
     page,
     limit,
@@ -61,10 +61,13 @@ console.log(router.query)
   console.log(contactUser);
   // console.log(token)
   console.log(isError);
-  useEffect(()=>{
-
-    router.push(`/transfer/?page=${page}&name=${search}`, `/transfer/?page=${page}&name=${search}`, { shallow: true })
-  },[page, search])
+  useEffect(() => {
+    router.push(
+      `/transfer/?page=${page}&name=${search}`,
+      `/transfer/?page=${page}&name=${search}`,
+      { shallow: true }
+    );
+  }, [page, search]);
 
   return (
     <DashboardLayout title="Transfer | LukiPay" active="transfer">
@@ -72,7 +75,7 @@ console.log(router.query)
         <header className={style.header}>
           <div className={style.title}>Search Receiver</div>
           <div className={style.searchwrapper}>
-            <HiOutlineSearch className={style.search}/>
+            <HiOutlineSearch className={style.search} />
             <input
               type="search"
               name="search"
@@ -110,7 +113,7 @@ console.log(router.query)
           {contactUser && page === 1 ? (
             <button onClick={() => setPage(page + 1)}>next</button>
           ) : contactUser && page < contactUser.pagination.totalPage ? (
-            <div className="pagination">
+            <div className={style.pagination2}>
               <button
                 onClick={() => {
                   if (page > 1) setPage(page - 1);
@@ -118,17 +121,25 @@ console.log(router.query)
               >
                 previous
               </button>
+              <div className="">
+                {page}/{contactUser && contactUser.pagination.totalPage}
+              </div>
               <button onClick={() => setPage(page + 1)}>next</button>
             </div>
           ) : contactUser &&
             (page - 1) * limit < contactUser.pagination.totalPage ? (
-            <button
-              onClick={() => {
-                if (page > 1) setPage(page - 1);
-              }}
-            >
-              previous
-            </button>
+            <>
+              <button
+                onClick={() => {
+                  if (page > 1) setPage(page - 1);
+                }}
+              >
+                previous
+              </button>
+              <div className="">
+                {page}/{contactUser && contactUser.pagination.totalPage}
+              </div>
+            </>
           ) : (
             <button
               onClick={() => {

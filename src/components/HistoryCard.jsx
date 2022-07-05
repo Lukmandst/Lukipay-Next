@@ -1,7 +1,7 @@
 import style from "components/styles/HistoryCard.module.css";
 import Image from "next/image";
 import DefaultPic from "../../public/android-chrome-512x512.png";
-import { currencyFormatter } from "helpers/formatter";
+import { currencyFormatter, formatPhoneNumber } from "helpers/formatter";
 
 function HistoryCard({ history, phone, user }) {
   return (
@@ -12,8 +12,9 @@ function HistoryCard({ history, phone, user }) {
             <Image
               src={
                 history && !history.image
-                  ? DefaultPic:
-                  user && !user.image? DefaultPic
+                  ? DefaultPic
+                  : user && !user.image
+                  ? DefaultPic
                   : `${process.env.NEXT_PUBLIC_IMG}${
                       user ? user.image : history && history.image
                     }`
@@ -32,7 +33,9 @@ function HistoryCard({ history, phone, user }) {
                 : history && history.fullName}
             </div>
             <div className={style.typeHistory}>
-              {user ? user.noTelp : history && history.type}
+              {user
+                ? user.noTelp && formatPhoneNumber(user.noTelp)
+                : history && history.type}
             </div>
           </div>
         </div>
