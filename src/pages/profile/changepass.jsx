@@ -2,20 +2,22 @@ import axios from "axios";
 import DashboardLayout from "components/DashboardLayout";
 import PasswordInput from "components/Input/pass";
 import Loading from "components/Loading";
+import { useRouter } from "next/router";
 import { useState } from "react";
 import { useSelector } from "react-redux";
 import style from "styles/Profile.module.css";
 
 function Changepass() {
-  const [old, setOld] = useState(false);
-  const [newPass, setNewPass] = useState(false);
-  const [confirm, setConfirm] = useState(false);
+  const [old, setOld] = useState('');
+  const [newPass, setNewPass] = useState('');
+  const [confirm, setConfirm] = useState('');
 
   const [loadingUpdate, setLoadingUpdate] = useState(false);
   const [msg, setMsg] = useState(false);
   const [errmsg, seterrMsg] = useState(false);
   const { token, id } = useSelector((state) => state.auth);
 
+  const router = useRouter();
   const updatePassword = async () => {
     setLoadingUpdate(false);
     setMsg(false);
@@ -39,9 +41,12 @@ function Changepass() {
       setMsg(updateResult.data.msg);
       setTimeout(() => {
         setMsg(false);
-        setOld('')
-        setNewPass('')
-        setConfirm('')
+        setOld("");
+        setNewPass("");
+        setConfirm("");
+        setTimeout(() => {
+          router.push("/dashboard");
+        }, 1000);
       }, 2000);
     } catch (error) {
       console.log(error);
@@ -49,9 +54,9 @@ function Changepass() {
       setLoadingUpdate(false);
       setTimeout(() => {
         seterrMsg(false);
-        setOld('')
-        setNewPass('')
-        setConfirm('')
+        setOld("");
+        setNewPass("");
+        setConfirm("");
       }, 2000);
     }
   };
@@ -64,7 +69,8 @@ function Changepass() {
             <header className={style.infoHeader}>
               <div className={style.title}>Change Password</div>
               <div className={style.subtitle}>
-              You must enter your current password and then type your new password twice.
+                You must enter your current password and then type your new
+                password twice.
               </div>
             </header>
             {msg ? (
@@ -79,16 +85,19 @@ function Changepass() {
               style={{ width: "50%", margin: "auto" }}
             >
               <PasswordInput
+                defaultValue={old}
                 id="old"
                 placeholder="Current Password"
                 setPass={setOld}
               />
               <PasswordInput
+                defaultValue={newPass}
                 id="new"
                 placeholder="New Password"
                 setPass={setNewPass}
               />
               <PasswordInput
+                defaultValue={confirm}
                 id="confirm"
                 placeholder="Repeat new Password"
                 setPass={setConfirm}

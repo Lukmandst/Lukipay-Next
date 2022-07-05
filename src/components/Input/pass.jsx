@@ -4,6 +4,7 @@ import { MdVisibilityOff, MdVisibility, MdLockOutline } from "react-icons/md";
 function PasswordInput({
   placeholder = "Enter your password",
   id = "pass",
+  defaultValue,
   setPass,
 }) {
   const [eye, setEye] = useState(false);
@@ -13,6 +14,7 @@ function PasswordInput({
         type={!eye ? "password" : "text"}
         name="pass"
         id={id}
+        value={defaultValue? defaultValue: defaultValue && defaultValue.length<1 && ''}
         placeholder={placeholder}
         onChange={(e) => {
           e.preventDefault();
@@ -23,7 +25,11 @@ function PasswordInput({
         <MdLockOutline />
       </i>
       <i className="eye" onClick={() => setEye(!eye)}>
-        {!eye ? <MdVisibilityOff style={{color: '#88888f'}}/> : <MdVisibility />}
+        {!eye ? (
+          <MdVisibilityOff style={{ color: "#88888f" }} />
+        ) : (
+          <MdVisibility />
+        )}
       </i>
     </div>
   );

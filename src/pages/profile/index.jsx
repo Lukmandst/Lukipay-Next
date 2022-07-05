@@ -241,6 +241,7 @@ function Profile() {
                 type="button"
                 className={style.button}
                 value="Change PIN"
+                onClick={() => router.push(`/profile/changepin`)}
               />
               <i>
                 <MdArrowForward className={style.icon} />

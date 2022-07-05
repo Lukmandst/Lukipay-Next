@@ -1,5 +1,6 @@
 import axios from "axios";
 import Link from "next/link";
+import { useRouter } from "next/router";
 import { useState } from "react";
 import ReactCodeInput from "react-code-input";
 import { useSelector } from "react-redux";
@@ -19,6 +20,8 @@ function ModalPin({
   const [pin, setPinCode] = useState("");
 
   const { token } = useSelector((state) => state.auth);
+
+  const router = useRouter();
 
   const handlePinChange = (pin) => {
     setPinCode(pin);
@@ -40,7 +43,7 @@ function ModalPin({
         // console.log(pinResult.data);
         setLoading(false);
         seterrMsg(false);
-        setSuccessMsg(pinResult.data.msg + "payment will be processed soon");
+        setSuccessMsg(pinResult.data.msg + ", payment will be processed soon");
 
         setTimeout(async () => {
           setLoading(false);
@@ -61,6 +64,9 @@ function ModalPin({
           setLoading(false);
           seterrMsg(false);
           setSuccessMsg(transferResult.data.msg);
+          setTimeout(() => {
+            router.push("/dashboard");
+          }, 1500);
         }, 5000);
       }
     } catch (error) {

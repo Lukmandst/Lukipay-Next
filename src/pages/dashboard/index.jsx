@@ -92,7 +92,12 @@ function Dashboard() {
                 )}
               </div>
             </div>
-            <div className={style.graph}>graph</div>
+            <div className={style.graph}>
+              
+
+
+              
+            </div>
           </section>
           <section className={style.section2}>
             <div className={style.historyHead}>

@@ -7,6 +7,7 @@ import { useEffect, useState } from "react";
 import { BsPencil } from "react-icons/bs";
 import axios from "axios";
 import Loading from "components/Loading";
+import { useRouter } from "next/router";
 
 function Info() {
   const [firstName, setFirstname] = useState("");
@@ -17,6 +18,7 @@ function Info() {
   const [errmsg, seterrMsg] = useState(false);
   const { token, id } = useSelector((state) => state.auth);
   const { user, isLoading } = GetUser(id, token);
+  const router = useRouter();
 
   const firstNameHandler = (value) => {
     setFirstname(value);
@@ -178,7 +180,12 @@ function Info() {
                         {user && formatPhoneNumber(user.data.noTelp)}
                       </div>
                     </div>
-                    <div className={style.manage}>Manage</div>
+                    <div
+                      className={style.manage}
+                      onClick={() => router.push("/profile/changephone")}
+                    >
+                      Manage
+                    </div>
                   </div>
                 </>
               )}
