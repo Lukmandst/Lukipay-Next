@@ -45,10 +45,10 @@ export function GetSmallHistory(token) {
     isError: error,
   };
 }
-export function GetFullHistory(filter = "WEEK", token) {
+export function GetFullHistory(filter = "WEEK", token,limit) {
   const { data, error } = useSWR(
     [
-      `${process.env.NEXT_PUBLIC_HOST_API}/transaction/history?page=1&limit=20&filter=${filter}`,
+      `${process.env.NEXT_PUBLIC_HOST_API}/transaction/history?page=1&limit=${limit}&filter=${filter}`,
       token,
     ],
     fetcher,

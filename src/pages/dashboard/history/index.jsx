@@ -9,8 +9,9 @@ import style from "styles/History.module.css";
 
 function History() {
   const [filter, setFilter] = useState("WEEK");
+  const [limit, setLimit] = useState(7);
   const { token } = useSelector((state) => state.auth);
-  const { history, isLoading } = GetFullHistory(filter, token);
+  const { history, isLoading } = GetFullHistory(filter, token,limit);
   const router = useRouter();
   return (
     <>
@@ -18,9 +19,15 @@ function History() {
         <div className={style.historyMain}>
           <header className={style.header}>
             <div className={style.title}>Transaction History</div>
-            <div className={style.filter}>
-              <span>--Select Filter--</span>
-            </div>
+            <select
+              className={style.filter}
+              onChange={(e) => setLimit(e.target.value)}
+            >
+              <option value={7}>--Select Filter--</option>
+              <option value={7}>--Weekly--</option>
+              <option value={30}>--Monthly--</option>
+              <option value={120}>--Yearly--</option>
+            </select>
           </header>
           <main className={style.mainSection}>
             {isLoading ? (
@@ -52,7 +59,7 @@ function History() {
                           amount: result.amount,
                           status: result.status,
                           notes: result.notes,
-                          image: result.image
+                          image: result.image,
                         },
                       })
                     }

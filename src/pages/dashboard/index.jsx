@@ -7,21 +7,114 @@ import { useSelector } from "react-redux";
 import { currencyFormatter, formatPhoneNumber } from "helpers/formatter";
 import Link from "next/link";
 import Modaltopup from "components/Modal";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Image from "next/image";
 import HistoryCard from "components/HistoryCard";
 import Loading from "components/Loading";
 import WhiteLoading from "components/Loading copy";
 import { useRouter } from "next/router";
+import dynamic from "next/dynamic";
+
+import {
+  BarChart,
+  Bar,
+  Cell,
+  XAxis,
+  YAxis,
+  CartesianGrid,
+  Tooltip,
+  Legend,
+  LabelList,
+  ResponsiveContainer,
+} from "recharts";
+
+const renderCustomizedLabel = (props) => {
+  const { x, y, width, height, value } = props;
+  const radius = 10;
+
+  return (
+    <g>
+      <circle cx={x + width / 2} cy={y - radius} r={radius} fill="#8884d8" />
+      <text
+        x={x + width / 2}
+        y={y - radius}
+        fill="#fff"
+        textAnchor="middle"
+        dominantBaseline="middle"
+      >
+        {value && value.split(" ")[1]}
+      </text>
+    </g>
+  );
+};
+
+const data = [
+  {
+    name: "Page A",
+    uv: 4000,
+    pv: 2400,
+    amt: 2400,
+  },
+  {
+    name: "Page B",
+    uv: 3000,
+    pv: 1398,
+    amt: 2210,
+  },
+  {
+    name: "Page C",
+    uv: 2000,
+    pv: 8,
+    amt: 2290,
+  },
+  {
+    name: "Page D",
+    uv: 2780,
+    pv: 3908,
+    amt: 2000,
+  },
+  {
+    name: "Page E",
+    uv: 18,
+    pv: 4800,
+    amt: 2181,
+  },
+  {
+    name: "Page F",
+    uv: 2390,
+    pv: 3800,
+    amt: 2500,
+  },
+  {
+    name: "Page G",
+    uv: 3490,
+    pv: 4300,
+    amt: 2100,
+  },
+];
 
 function Dashboard() {
   const [modal, setModal] = useState(false);
+  const [income, setIncome] = useState(false);
+  const [expense, setExpense] = useState(false);
   const { id, token } = useSelector((state) => state.auth);
   const { user, isLoading } = GetUser(id, token);
   const { dashboard, isLoading: loadingDashboard } = GetDashboard(id, token);
   const { smallHistory } = GetSmallHistory(token);
   const router = useRouter();
-  console.log(smallHistory);
+  // console.log(smallHistory);
+  console.log(dashboard);
+
+  useEffect(() => {
+    if (dashboard) {
+      setIncome(dashboard.data.listIncome);
+    }
+    if (dashboard) {
+      setExpense(dashboard.data.listExpense);
+    }
+    console.log(dashboard && dashboard.data.listExpense, "expense");
+    console.log(dashboard && dashboard.data.listIncome, "income");
+  }, [dashboard]);
   // if (isLoading) return <Loading />;
   return (
     <>
@@ -93,10 +186,27 @@ function Dashboard() {
               </div>
             </div>
             <div className={style.graph}>
-              
-
-
-              
+              <BarChart
+                width={500}
+                height={300}
+                data={income}
+                margin={{
+                  top: 5,
+                  right: 30,
+                  left: 20,
+                  bottom: 5,
+                }}
+              >
+                <CartesianGrid strokeDasharray="3 3" />
+                <XAxis dataKey="day" />
+                <YAxis />
+                <Tooltip />
+                <Legend />
+                <Bar dataKey="total" fill="#6379F4">
+                  <LabelList dataKey="name" content={renderCustomizedLabel} />
+                </Bar>
+                {/* <Bar dataKey="uv" fill="#82ca9d" minPointSize={10} /> */}
+              </BarChart>
             </div>
           </section>
           <section className={style.section2}>
@@ -153,4 +263,5 @@ function Dashboard() {
   );
 }
 
-export default Dashboard;
+// export default Dashboard;
+export default dynamic(() => Promise.resolve(Dashboard), { ssr: false });

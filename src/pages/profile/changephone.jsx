@@ -43,12 +43,12 @@ function Changepin() {
         setMsg(pinResult.data.msg);
         setConfirm(true);
         setTimeout(() => {
-          setMsg('');
+          setMsg("");
           setPhone("");
           setTimeout(() => {
             router.push("/dashboard");
           }, 1000);
-        }, 2000)
+        }, 2000);
       }
     } catch (error) {
       console.error(error);
@@ -83,15 +83,16 @@ function Changepin() {
               style={{ width: "50%", margin: "auto" }}
             >
               <input
+                className={style.phoneinput}
+                placeholder="Enter your phone number"
                 type="number"
                 name="number"
                 id="number"
                 value={phone ? phone : phone.length < 1 && ""}
                 onChange={(e) => {
-                    e.preventDefault()
-                  
-                    setPhone(e.target.value);
-                  
+                  e.preventDefault();
+
+                  setPhone(e.target.value);
                 }}
               />
               {msg ? (

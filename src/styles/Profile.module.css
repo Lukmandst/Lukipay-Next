@@ -172,3 +172,16 @@
   right: 0;
   top: 1rem;
 }
+
+.phoneinput{
+  font-size: 20px;
+  font-weight: 600;
+  height: 2rem;
+  border: none;
+  border-bottom:  1.5px solid rgba(169, 169, 169, 0.6) !important;
+  padding: 1rem;
+}
+.phoneinput::-webkit-inner-spin-button,
+.phoneinput::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+}
