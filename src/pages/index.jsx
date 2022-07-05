@@ -61,7 +61,7 @@ export default function Home() {
       {/* <Navbar /> */}
       <header className={styles.headerBg}>
         <section className={styles.navBanner}>
-          <div className={styles.fazzPay}>Fazzpay</div>
+          <div className={styles.fazzPay}>LukiPay</div>
           <div className={styles.wrapperButton}>
             <Link href="/login">
               <div className={styles.btnLogin}>Login</div>
