@@ -45,6 +45,9 @@ function CreatePin() {
       setSuccessMsg(createPinResult.data.msg + " Please Log In again !");
       setTimeout(() => {
         dispatch(resetAuth());
+        setTimeout(() => {
+          router.push("/login");
+        }, 500);
       }, 3000);
     } catch (error) {
       {
