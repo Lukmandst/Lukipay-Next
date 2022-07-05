@@ -176,9 +176,13 @@ function Info() {
                   >
                     <div className="">
                       <div className={style.detailsName}>Phone Number</div>
-                      <div className={style.detailsValue}>
-                        {user && formatPhoneNumber(user.data.noTelp)}
-                      </div>
+                      {user && user.data.noTelp ? (
+                        <div className={style.detailsValue}>
+                          {user && formatPhoneNumber(user.data.noTelp)}
+                        </div>
+                      ) : (
+                        <div>Set phone number!</div>
+                      )}
                     </div>
                     <div
                       className={style.manage}
